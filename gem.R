@@ -1,6 +1,6 @@
 ##01热图
 getwd() 
-setwd("/home/gejiachen/gem/01pRRophetic")
+setwd("/home/pengdu/gem/01pRRophetic")
 clin <- read.table("clinical.txt",sep = "\t",header =T,row.names = 1)
 exp <- read.table("gem.txt",header = T,row.names = 1)
 ##样本排序 
@@ -40,7 +40,7 @@ dev.off()
 #结束出图 
 
 ##02degs
-setwd("/home/gejiachen/gem/02degs")
+setwd("/home/pengdu/gem/02degs")
 sample <- read.table("TcgaTargetGTEX_phenotype.txt",header = T,sep = "\t")
 normal <- subset(sample,X_sample_type == "Solid Tissue Normal"|X_sample_type == "Normal Tissue")
 tumor <- subset(sample,X_sample_type == "Primary Tumor")
@@ -298,7 +298,7 @@ ggplot(data = input,aes(x = log2FoldChange,y=-log10(padj),
     max.overlaps = Inf) 
 
 ##03wgcna判断gem敏感性相关mrna和lncrna
-setwd("/home/gejiachen/gem/03wgcna")
+setwd("/home/pengdu/gem/03wgcna")
 library(WGCNA)
 #mrna的wgcna
 Gemcitabine <- read.table("gem.txt",header = T)
@@ -620,7 +620,7 @@ names(datExpr0)#会返回所有在分析中的基因ID
 magenta <- names(datExpr0)[moduleColors=="magenta"]#返回属于棕色模块的基因ID
 
 ##04mrna的go/kegg富集分析
-setwd("/home/gejiachen/gem/04gokegg")
+setwd("/home/pengdu/gem/04gokegg")
 #取交集lncrna
 options(stringsAsFactors = F)
 dat <- read.csv("hubgene_MMGS_lncrna_magenta.csv",header=T)
@@ -687,7 +687,7 @@ dotplot(KEGG, x = "GeneRatio", color = "p.adjust", size = "Count", #默认参数
 
 ##05 101种机器学习方法 
 getwd()
-setwd("/home/gejiachen/gem/05ml/Figures")
+setwd("/home/pengdu/gem/05ml/Figures")
 bmt <-read.csv('survivalplot.csv',header=T,sep = ",")
 #TCGA_BLCA
 blca <- subset(bmt,Cohort == "TCGA_BLCA")
@@ -818,7 +818,7 @@ legend(0.5,0.5, # 这里设置legend的位置坐标：横坐标0,纵坐标1。�
 
 ##06 突变组对比
 getwd()
-setwd("/home/gejiachen/gem/06mutation")
+setwd("/home/pengdu/gem/06mutation")
 library(maftools)
 blca.maf <- TCGAmutations::tcga_available()
 blca.maf <- TCGAmutations::tcga_load(study = "blca")
@@ -919,7 +919,7 @@ ggviolin(tmb, x="group", y="total_perMB_log", color = "group",
 
 ##07 high vs low
 #gsea
-setwd("/home/gejiachen/gem/07highlow/gsea")
+setwd("/home/pengdu/gem/07highlow/gsea")
 rt = data.table::fread("TCGA-BLCA.star_counts.tsv.gz", header=T, sep="\t", check.names=F)
 rt <- as.data.frame.matrix(rt)
 geneid <- rt[,1]
@@ -985,7 +985,7 @@ gseaplot2(GSEA_KEGG,geneSetID = 1:5)
 gseaplot2(GSEA_KEGG,geneSetID = 6:10)
 
 #infiltration 
-setwd("/home/gejiachen/gem/07highlow/infiltration")
+setwd("/home/pengdu/gem/07highlow/infiltration")
 immune <- read.csv("infiltration_estimation_for_tcga.csv",header = T)
 clin <- immune[,1:2]
 rownames(clin) <- clin[,1]
@@ -1079,7 +1079,7 @@ ggviolin(checkpoint, x="checkpoint", y="Relative expression", color = "group",
                      symnum.args=list(cutpoints = c(0, 0.001, 0.01, 0.05, 1), symbols = c("***", "**", "*", " ")),
                      label = "p.signif") +rotate_x_text(60)
 #临床信息
-setwd("/home/gejiachen/gem/07highlow/clinical")
+setwd("/home/pengdu/gem/07highlow/clinical")
 library("ggpubr")
 # Tstage
 Tstage <- read.csv("Tstage.csv",header = T,sep = ",",check.names = F)
@@ -1164,7 +1164,7 @@ ggviolin(dnass, x="stemness", y="stemness score", color = "group",
                      symnum.args=list(cutpoints = c(0, 0.001, 0.01, 0.05, 1), symbols = c("***", "**", "*", " ")),
                      label = "p.signif") +rotate_x_text(60)
 #ImmuneSigs 
-setwd("/home/gejiachen/gem/07highlow/infiltration")
+setwd("/home/pengdu/gem/07highlow/infiltration")
 immune <- read.csv("TCGA_pancancer_10852whitelistsamples_68ImmuneSigs.csv",header = T)
 clin <- immune[,1:2]
 rownames(clin) <- clin[,1]
@@ -1224,7 +1224,7 @@ pheatmap(pre_heatdata,
          cluster_cols = F)
 dev.off() 
 #pathway 
-setwd("/home/gejiachen/gem/07highlow/infiltration")
+setwd("/home/pengdu/gem/07highlow/infiltration")
 immune <- read.csv("Pancan12_GenePrograms_drugTargetCanon_in_Pancan33.csv",header = T)
 clin <- immune[,1:2]
 rownames(clin) <- clin[,1]
@@ -1288,7 +1288,7 @@ dev.off()
 library(autoReg)
 library(survival)
 library(tidyverse)
-setwd("/home/gejiachen/gem/08nomogram")
+setwd("/home/pengdu/gem/08nomogram")
 blca <- read.csv("nomogram.csv",header = T,row.names = 1)
 #cox回归模型构建
 colnames(blca)
@@ -1392,7 +1392,7 @@ forestplot(labeltext = as.matrix(rs_forest[,1:4]),
            
            graph.pos = 5)#设置森林图的位置，此处设置为4，则出现在第四列
 #roc曲线
-setwd("/home/gejiachen/gem/08nomogram")
+setwd("/home/pengdu/gem/08nomogram")
 blca <- read.csv("nomogram.csv",header = T,row.names = 1)
 #cox回归模型构建
 coxmod <- coxph(Surv(blca$OS,blca$Status == 1)~Age + Sex + Subtype + T + N + M + 
@@ -1508,7 +1508,7 @@ library(compare)
 library(stargazer)
 library(survival)
 library(rms)
-setwd("/home/gejiachen/gem/08nomogram")
+setwd("/home/pengdu/gem/08nomogram")
 training_dataset <- read.csv("calculator.txt",header = T,row.names = 1,sep = "\t")
 colnames(training_dataset)
 dd<-datadist(training_dataset)
@@ -1523,7 +1523,7 @@ DynNom(f_cph,training_dataset,clevel = 0.95) #生成动态列线图
 DNbuilder(model = f_cph,data = training_dataset,clevel = 0.95)
 
 ##09 immunotherapy
-setwd("/home/gejiachen/gem/09immunotherapy")
+setwd("/home/pengdu/gem/09immunotherapy")
 load("~/gem/09immunotherapy/IMvigor210CoreBiologies.Rdata")
 #EMX2OS
 EMX2OS <- subset(annoData,symbol == "EMX2OS")
@@ -1724,7 +1724,7 @@ ggviolin(data, x="Gene", y="Relative expression", color = "TCGAsubtype",
   ) 
 
 ##10cerna
-setwd("/home/gejiachen/gem/10cerna")
+setwd("/home/pengdu/gem/10cerna")
 #lncrna和mirna
 lncrna_mirna <- read.table("starBaseV3_hg38_CLIP-seq_lncRNA_all.txt",sep = "\t",header = T)
 lncrna <- read.table("Training_expr.txt",header = T,row.names = 1)
@@ -1841,7 +1841,7 @@ plot(g,
 dev.off()
 
 ##11单细胞测序
-setwd("/home/gejiachen/gem/11singlecell")
+setwd("/home/pengdu/gem/11singlecell")
 samples=list.files("GSE135337_RAW/",pattern = 'gz')
 library(data.table)
 library(limma)
@@ -2056,7 +2056,7 @@ ggviolin(df, x="LINC00930.expression", y="Pseudotime", color = "LINC00930.expres
                      label = "p.signif") + 
   ylim(0,45) 
 #cytotrace
-.libPaths(c("/home/gejiachen/rpackage")) 
+.libPaths(c("/home/pengdu/rpackage")) 
 library(CytoTRACE)
 data <- readRDS("~/gem/11singlecell/epithelial.rds")
 expr <- as.matrix(data@assays$RNA@counts) 
@@ -2107,7 +2107,7 @@ write.table(t(dat),file = expFile,sep = '\t',quote = F)
 geneFile='geneFile.txt'
 write.table(geneInfor,file = geneFile,sep = '\t',quote = F,col.names = F,row.names = F)
 #infercnvpy
-setwd("/home/gejiachen/gem/11singlecell")
+setwd("/home/pengdu/gem/11singlecell")
 infercnvpy <- read.table("infercnvpy.txt",header = T,sep = "\t")
 my_comparisons <- list(c("LINC00930low","LINC00930high"))
 ggviolin(infercnvpy, x="cell_groups", y="cnv_score", color = "cell_groups", 
@@ -2129,7 +2129,7 @@ ggviolin(infercnvpy, x="cell_groups", y="cnv_score", color = "cell_groups",
 library(dplyr)
 library(Seurat)
 library(patchwork)
-setwd("/home/gejiachen/gem/11singlecell/GSE130001")
+setwd("/home/pengdu/gem/11singlecell/GSE130001")
 sc.data<-Read10X_h5("BLCA_GSE130001_expression.h5")
 data <- CreateSeuratObject(counts = sc.data, project = "GSE130001") 
 ###线粒体基因比例
@@ -2306,7 +2306,7 @@ ggviolin(df, x="EMX2OS.expression", y="Pseudotime", color = "EMX2OS.expression",
                      label = "p.signif") + 
   ylim(0,45) 
 #cytotrace
-.libPaths(c("/home/gejiachen/rpackage")) 
+.libPaths(c("/home/pengdu/rpackage")) 
 library(CytoTRACE)
 data <- readRDS("~/gem/11singlecell/GSE130001/epithelial.rds")
 expr <- as.matrix(data@assays$RNA@counts) 
@@ -2358,7 +2358,7 @@ geneFile='geneFile.txt'
 write.table(geneInfor,file = geneFile,sep = '\t',quote = F,col.names = F,row.names = F)
 table(data$Celltype..minor.lineage.)
 #infercnvpy
-setwd("/home/gejiachen/gem/11singlecell/GSE130001")
+setwd("/home/pengdu/gem/11singlecell/GSE130001")
 infercnvpy <- read.table("infercnvpy.txt",header = T,sep = "\t")
 my_comparisons <- list(c("EMX2OSlow","EMX2OShigh"))
 ggviolin(infercnvpy, x="cell_groups", y="cnv_score", color = "cell_groups", 
@@ -2377,7 +2377,7 @@ ggviolin(infercnvpy, x="cell_groups", y="cnv_score", color = "cell_groups",
   coord_flip()
 
 ##12pcr
-setwd("/home/gejiachen/gem/12pcr")
+setwd("/home/pengdu/gem/12pcr")
 library(ggplot2)
 library(ggpubr)
 pcr <- read.csv("sample_pcr.csv",header = T,sep = ",")
